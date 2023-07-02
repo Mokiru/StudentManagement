@@ -44,14 +44,21 @@ public class CustomerController {
         return "redirect:/";
     }
 
-    @GetMapping("/sign/in")
-    public String signInpage() { return "signIn"; }
-
-    @PostMapping("/sign/in")
-    public String signInAction(Customer customer, RedirectAttributes attrs) {
-
-
-
-        return "redirect:/mainpage";
+    @RequestMapping ("/sign/in")
+    public String signInAction(String username, String password, RedirectAttributes attrs) {
+        String u = username;
+        String p = password;
+        if (username == null || (username = username.trim()).isEmpty()) {
+            attrs.addFlashAttribute("message", "用户名不能为空");
+            return "redirect:/";
+        }
+        if (password == null || (password = password.trim()).isEmpty()) {
+            attrs.addFlashAttribute("message", "密码不能为空");
+            return "redirect:/";
+        }
+        return "redirect:/customer/main";
     }
+
+    @RequestMapping("/main")
+    public String getMainpage() { return "mainpage"; }
 }
