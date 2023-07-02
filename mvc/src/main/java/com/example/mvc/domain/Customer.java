@@ -14,6 +14,6 @@ public class Customer {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate busiExpireDate;
     private String location;
-    private String like;
+    private String [] like ;
 
 }
