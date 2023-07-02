@@ -10,8 +10,10 @@
         <legend>
             注册
         </legend>
-        <form action="/customer/sign/up">
-            <input type="text" name="username" placeholder="用户名" method="post">
+        <!-- 取出错误提示信息 -->
+        <p th:text="${message}"></p>
+        <form action="/customer/sign/up" method="post">
+            <input type="text" name="username" placeholder="用户名">
             <input type="password" name="password" placeholder="密码">
             <input type="text" name="realname" placeholder="姓名"><br>
             <input type="radio" name="sex" value="male">男
