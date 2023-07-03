@@ -46,4 +46,12 @@ public class CustomerRepositoryTests {
         repository.updatePasswordById("1234", 2L);
 
     }
+
+    @Test
+    public void findByUsername() {
+
+        Customer c = repository.findByUsername( "zhangtingyu" );
+        System.out.println( c );
+
+    }
 }
