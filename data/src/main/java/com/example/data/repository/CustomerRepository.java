@@ -9,8 +9,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     // 根据 account 查找单个 Customer 对象
-    // "SELECT id, account, email, tel, password, salt FROM t_customers WHERE account = ? "
-    Customer findByAccount(String account);
+    // "SELECT * FROM t_customers WHERE account = ? "
+    Customer findByUsername(String username);
     // 根据 email 查找单个 Customer 对象
     // "SELECT id, account, email, tel, password, salt FROM t_customers WHERE email = ? "
     Customer findByEmail(String email);
