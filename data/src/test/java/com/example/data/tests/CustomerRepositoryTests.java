@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jdbc.repository.query.Query;
 
+import java.util.Optional;
+
 @SpringBootTest
 public class CustomerRepositoryTests {
 
@@ -23,8 +25,12 @@ public class CustomerRepositoryTests {
         repository.save(c);
     }
 
-    @Query()
+    @Test
     public void findById(Long id) {
+
+        Optional<Customer> c = repository.findById(1L);
+
+        System.out.println( c );
 
     }
 }
