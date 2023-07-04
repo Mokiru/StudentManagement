@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<fieldset>
+
+    <legend>
+        登录
+    </legend>
+    <div th:text="${message}"></div>
+
+    <form action = "/customer/sign/in" method="post">
+        <input type = "text" name = "username" th:value = "${session.username}" placeholder="用户名">
+        <input type = "password" name = "password"  placeholder="密码">
+        <button type = "submit">登录</button>
+        <a href = "/customer/sign/up">注册</a>
+
+    </form>
+
+</fieldset>
+</body>
+</html>

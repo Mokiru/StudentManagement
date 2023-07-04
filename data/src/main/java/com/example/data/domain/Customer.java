@@ -6,6 +6,7 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 @Data
 @Table("t_customers")
@@ -22,5 +23,11 @@ public class Customer {
     private LocalDate birthdate;
 
     private String location;
-    private String [] like ;
+    private String like ;
+
+    private String salt;
+
+    public void setLike(String [] l) {
+        this.like = Arrays.toString(l);
+    }
 }
