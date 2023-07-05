@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+
 
 @Controller
 @RequestMapping("/customer")
@@ -43,12 +45,14 @@ public class CustomerController {
         String check = service.encrypt(pwd, salt);
         System.out.println(allc.getSalt());
         if (check.equals(allc.getPassword())) {
-            session.setAttribute("realname", cd.getRealname());
-            session.setAttribute("sex", cd.getSex());
-            session.setAttribute("birthdate", cd.getBirthdate());
-            session.setAttribute("location", cd.getLocation());
-            session.setAttribute("like", cd.getLike());
-            session.setAttribute("id", c.getId());
+            if (cd != null) {
+                session.setAttribute("realname", cd.getRealname());
+                session.setAttribute("sex", cd.getSex());
+                session.setAttribute("birthdate", cd.getBirthdate());
+                session.setAttribute("location", cd.getLocation());
+                session.setAttribute("like", cd.getLike());
+                session.setAttribute("id", c.getId());
+            }
             return "redirect:/customer/mainPage";
         }
         ra.addFlashAttribute("message", "用户名或密码有误");
@@ -87,4 +91,9 @@ public class CustomerController {
         return "/customer/mainPage";
     }
 
+    @RequestMapping("/sign/out")
+    public String signOutAction(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
