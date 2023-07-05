@@ -43,7 +43,7 @@ public class CustomerController {
         }
         String salt = allc.getSalt();
         String check = service.encrypt(pwd, salt);
-        System.out.println(allc.getSalt());
+        //System.out.println(allc.getSalt());
         if (check.equals(allc.getPassword())) {
             if (cd != null) {
                 session.setAttribute("realname", cd.getRealname());
