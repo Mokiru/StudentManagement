@@ -16,18 +16,6 @@ public class Customer {
 
     private String username;
     private String password;
-    private String realname;
-    private String sex;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthdate;
-
-    private String location;
-    private String like ;
 
     private String salt;
-
-    public void setLike(String [] l) {
-        this.like = Arrays.toString(l);
-    }
 }

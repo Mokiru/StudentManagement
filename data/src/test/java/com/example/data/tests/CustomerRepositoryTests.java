@@ -1,6 +1,7 @@
 package com.example.data.tests;
 
 import com.example.data.domain.Customer;
+import com.example.data.domain.CustomerDetails;
 import com.example.data.repository.CustomerRepository;
 import com.example.data.service.CustomerService;
 import org.junit.jupiter.api.Test;
@@ -21,11 +22,11 @@ public class CustomerRepositoryTests {
     @Test
     public void testSave() {
         Customer c = new Customer();
-
+        CustomerDetails cd = new CustomerDetails();
         c.setUsername("zsda");
         c.setPassword("hello");
         String [] h = {"123", "32"};
-        c.setLike(h);
+        cd.setLike(h);
         service.save(c);
     }
 
