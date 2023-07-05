@@ -27,6 +27,8 @@ public class CustomerController {
     public String signInAction(Customer c, RedirectAttributes ra, HttpSession session) {
         String un = c.getUsername();
         String pwd = c.getPassword();
+        CustomerDetails cd = new CustomerDetails();
+        cd = cds.findByCustomerId(c.getId());
         if (un == null || (un = un.trim()).isEmpty()) {
             ra.addFlashAttribute("message", "用户名不能为空");
             return "redirect:/";
@@ -41,6 +43,12 @@ public class CustomerController {
         String check = service.encrypt(pwd, salt);
         System.out.println(allc.getSalt());
         if (check.equals(allc.getPassword())) {
+            session.setAttribute("realname", cd.getRealname());
+            session.setAttribute("sex", cd.getSex());
+            session.setAttribute("birthdate", cd.getBirthdate());
+            session.setAttribute("location", cd.getLocation());
+            session.setAttribute("like", cd.getLike());
+            session.setAttribute("id", c.getId());
             return "redirect:/customer/mainPage";
         }
         ra.addFlashAttribute("message", "用户名或密码有误");

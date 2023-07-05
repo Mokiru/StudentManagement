@@ -5,6 +5,8 @@ import com.example.data.repository.CustomerDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class CustomerDetailsService {
 
@@ -15,4 +17,17 @@ public class CustomerDetailsService {
         cdr.save(cd);
     }
 
+    public CustomerDetails findByCustomerId(Long id) {
+        return cdr.findByCustomerId(id);
+    }
+
+    public void UpdateByCustomerId(CustomerDetails cd) {
+        String realname = cd.getRealname();
+        String sex = cd.getSex();
+        LocalDate birthdate = cd.getBirthdate();
+        String location = cd.getLocation();
+        String like = cd.getLike();
+        Long id = cd.getCustomerId();
+        cdr.updateByCustomerId(realname, sex, birthdate, location, like, id);
+    }
 }
