@@ -3,6 +3,7 @@ package com.example.data.tests;
 import com.example.data.domain.Customer;
 import com.example.data.domain.CustomerDetails;
 import com.example.data.repository.CustomerRepository;
+import com.example.data.service.CustomerDetailsService;
 import com.example.data.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,20 @@ public class CustomerRepositoryTests {
     @Autowired
     CustomerService service;
 
+    @Autowired
+    CustomerDetailsService cds;
+
     @Test
     public void testSave() {
         Customer c = new Customer();
         CustomerDetails cd = new CustomerDetails();
-        c.setUsername("zsda");
+        c.setUsername("zsssda");
         c.setPassword("hello");
         String [] h = {"123", "32"};
         cd.setLike(h);
         service.save(c);
+        cd.setCustomerId(c.getId());
+        cds.save(cd);
     }
 
     @Test

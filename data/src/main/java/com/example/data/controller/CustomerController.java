@@ -1,6 +1,8 @@
 package com.example.data.controller;
 
 import com.example.data.domain.Customer;
+import com.example.data.domain.CustomerDetails;
+import com.example.data.service.CustomerDetailsService;
 import com.example.data.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class CustomerController {
 
     @Autowired
-    private CustomerService service;
+    private CustomerService service; // customer  Service
+
+    @Autowired
+    private CustomerDetailsService cds; // customerDetails      Service
 
     @PostMapping("/sign/in")
     public String signInAction(Customer c, RedirectAttributes ra, HttpSession session) {
@@ -46,8 +51,26 @@ public class CustomerController {
     public String signUpPage() { return "/customer/signUp"; }
 
     @PostMapping("/sign/up")
-    public String signUpAction(Customer c, RedirectAttributes ra) {
+    public String signUpAction(Customer c, CustomerDetails cd, RedirectAttributes ra, HttpSession session) {
+        String un = c.getUsername();
+        String pwd = c.getPassword();
+        if (un == null || (un = un.trim()).isEmpty()) {
+            ra.addFlashAttribute("message", "用户名不能为空");
+            return "redirect:/customer/sign/up";
+        }
+        if (!service.findUsernameByUsername(un)) {
+            ra.addFlashAttribute("message", "用户名已经被占用");
+            return "redirect:/customer/sign/up";
+        }
+        session.setAttribute("username", un);
+        if (pwd == null || (pwd = pwd.trim()).isEmpty()) {
+            ra.addFlashAttribute("message", "密码不能为空");
+            return "redirect:/customer/sign/up";
+        }
+        session.setAttribute("password", pwd);
         service.save(c);
+        cd.setCustomerId(c.getId());
+        cds.save(cd);
         return "redirect:/";
     }
 

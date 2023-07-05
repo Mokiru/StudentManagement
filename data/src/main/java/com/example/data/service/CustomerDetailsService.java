@@ -11,5 +11,8 @@ public class CustomerDetailsService {
     @Autowired
     CustomerDetailsRepository cdr;
 
+    public void save(CustomerDetails cd) {
+        cdr.save(cd);
+    }
 
 }
