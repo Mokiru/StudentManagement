@@ -16,15 +16,13 @@ public class CustomerDetails {
 
     private String realname;
     private String sex;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
 
     private String location;
-    private String  like;
+    private String like;
 
     private Long customerId;
 
-    public void setLike(String [] l) {
-        this.like = Arrays.toString(l);
-    }
 }

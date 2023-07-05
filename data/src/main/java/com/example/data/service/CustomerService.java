@@ -40,7 +40,7 @@ public class CustomerService {
     }
 
     public boolean findUsernameByUsername(String username) {
-        if (repository.findUsernameByUsername(username).isEmpty()) {
+        if (repository.findUsernameByUsername(username) != null) {
             return true;
         }
         return false;

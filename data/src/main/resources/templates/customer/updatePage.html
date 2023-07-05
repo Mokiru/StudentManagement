@@ -9,9 +9,9 @@
         <form action = "/customer/details/update" method = "post">
             <input type="text" placeholder="用户名" th:value="${session.realname}" name="realname">
             <input type="text" placeholder="性别" th:value="${session.sex}" name="sex">
-            <input type="text" placeholder="出生日期" th:value="${session.birthdate}" name="birthdate">
+            <input type="date" min="1970-01-01" max="2099-12-31" th:value="${session.birthdate}" name="birthdate">
             <input type="text" placeholder="住址" th:value="${session.location}" name="location">
-            <input type="text" placeholder="喜好" th:value="${session.like}" name="like">
+            <input type="text" placeholder="爱好" th:value="${session.like}" name="like">
             <input type="hidden" th:value="${session.id}" name="customerId">
             <button type="submit">修改</button>
         </form>

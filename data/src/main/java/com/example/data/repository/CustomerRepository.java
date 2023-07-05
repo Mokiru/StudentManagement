@@ -21,6 +21,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
     @Query("UPDATE t_customers SET password = :password WHERE id = :id")
     void updatePasswordById(@Param("password") String password, @Param("id") Long id);
 
-    @Query( "SELECT 'username' FROM t_customers WHERE username = :username" )
+    @Query( "SELECT username FROM t_customers WHERE username = :username" )
     String findUsernameByUsername(String username);
+
 }

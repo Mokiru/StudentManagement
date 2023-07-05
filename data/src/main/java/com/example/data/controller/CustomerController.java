@@ -30,13 +30,13 @@ public class CustomerController {
         String un = c.getUsername();
         String pwd = c.getPassword();
         CustomerDetails cd = new CustomerDetails();
-        cd = cds.findByCustomerId(c.getId());
         if (un == null || (un = un.trim()).isEmpty()) {
             ra.addFlashAttribute("message", "用户名不能为空");
             return "redirect:/";
         }
         session.setAttribute("username", un);
         Customer allc = service.findByUsername(un);
+        cd = cds.findByCustomerId(allc.getId());
         if (allc == null) {
             ra.addFlashAttribute("message", "用户名不存在");
             return "redirect:/";
@@ -51,7 +51,7 @@ public class CustomerController {
                 session.setAttribute("birthdate", cd.getBirthdate());
                 session.setAttribute("location", cd.getLocation());
                 session.setAttribute("like", cd.getLike());
-                session.setAttribute("id", c.getId());
+                session.setAttribute("id", allc.getId());
             }
             return "redirect:/customer/mainPage";
         }
@@ -70,7 +70,7 @@ public class CustomerController {
             ra.addFlashAttribute("message", "用户名不能为空");
             return "redirect:/customer/sign/up";
         }
-        if (!service.findUsernameByUsername(un)) {
+        if (service.findUsernameByUsername(un)) {
             ra.addFlashAttribute("message", "用户名已经被占用");
             return "redirect:/customer/sign/up";
         }
