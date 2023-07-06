@@ -26,24 +26,33 @@ public class CustomerController {
     private CustomerDetailsService cds; // customerDetails      Service
 
     @PostMapping("/sign/in")
-    public String signInAction(Customer c, RedirectAttributes ra, HttpSession session) {
-        String un = c.getUsername();
-        String pwd = c.getPassword();
-        CustomerDetails cd = new CustomerDetails();
-        if (un == null || (un = un.trim()).isEmpty()) {
-            ra.addFlashAttribute("message", "用户名不能为空");
+    public String signInAction(Customer c, RedirectAttributes ra, String captcha, HttpSession session) {
+        String un = c.getUsername(); // 用户账号
+        String pwd = c.getPassword(); // 用户密码
+        CustomerDetails cd = new CustomerDetails(); // 用户详细信息
+        String code = (String)session.getAttribute("CAPTCHA"); // 获取 验证码
+
+        if (un == null || (un = un.trim()).isEmpty()) { // 账号判断
+            ra.addFlashAttribute("message", "账号不能为空");
             return "redirect:/";
         }
         session.setAttribute("username", un);
         Customer allc = service.findByUsername(un);
-        cd = cds.findByCustomerId(allc.getId());
+
         if (allc == null) {
             ra.addFlashAttribute("message", "用户名不存在");
             return "redirect:/";
         }
+
+        if ( !captcha.equals(code) ) {
+            ra.addFlashAttribute("message", "验证码错误");
+            return "redirect:/";
+        }
+
+        cd = cds.findByCustomerId(allc.getId());
         String salt = allc.getSalt();
         String check = service.encrypt(pwd, salt);
-        //System.out.println(allc.getSalt());
+
         if (check.equals(allc.getPassword())) {
             if (cd != null) {
                 session.setAttribute("realname", cd.getRealname());
