@@ -24,4 +24,5 @@ public class CustomerDetails { // 用户详细信息
 
     private Long customerId;
 
+    private String headshot;
 }

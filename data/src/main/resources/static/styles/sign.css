@@ -2,9 +2,16 @@
 
 /* class selector (class选择器) */
 .sign {
-    width: 600px;
-    box-shadow: 0 0 30px -15px #363636;
-    margin: 15vh auto ;
+    width: 770px;
+    box-shadow: 0 0 30px -15px #de6e6e;
+    margin: 20vh auto ;
+}
+
+.details {
+    width: 770px;
+    height: 700px;
+    box-shadow: 0 0 30px -15px #a233c6;
+    margin: 30vh auto;
 }
 
 .sign-logo {

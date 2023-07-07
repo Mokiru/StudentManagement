@@ -17,5 +17,8 @@ public interface CustomerDetailsRepository extends CrudRepository<CustomerDetail
     @Query("UPDATE t_details t SET t.realname=:realname, t.sex=:sex, t.birthdate=:birthdate,t.location=:location WHERE customer_id = :id")
     public void updateByCustomerId(String realname, String sex, LocalDate birthdate, String location, Long id);
 
+    @Modifying
+    @Query("UPDATE t_details t SET t.headshot=:headshot WHERE customer_id=:id")
+    public void updateHeadshotByCId(String headshot, Long id);
 
 }

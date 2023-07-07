@@ -1,16 +1,22 @@
 package com.example.data.tests;
 
+import com.example.data.domain.Car;
 import com.example.data.domain.Customer;
 import com.example.data.domain.CustomerDetails;
+import com.example.data.repository.CarRepository;
 import com.example.data.repository.CustomerDetailsRepository;
 import com.example.data.repository.CustomerRepository;
+import com.example.data.service.CarService;
 import com.example.data.service.CustomerDetailsService;
 import com.example.data.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -27,6 +33,9 @@ public class CustomerRepositoryTests {
 
     @Autowired
     CustomerDetailsRepository cdr;
+
+    @Autowired
+    CarRepository cr; // 汽车
 
     @Test
     public void testSave() {
@@ -93,5 +102,41 @@ public class CustomerRepositoryTests {
         cd.setLocation(location);
         cd.setBirthdate(birthdate);
         cdr.updateByCustomerId(realname, sex, birthdate, location, 9L);
+    }
+
+    @Test
+    public void findByCarClass() {
+        List<Car> c = cr.findByCarClass("%" + "e" + "%");
+        System.out.println( c.size() );
+        List<Car> b = cr.findByCarType("%" + "e" + "%");
+        System.out.println( b.size() );
+    }
+    @Autowired
+    CarService cs;
+
+    @Test
+    public void findByCarClassService() {
+        List<Car> c = cs.findByCarClass("e");
+        System.out.println( c.size() );
+    }
+
+    @Test
+    public void filePath() {
+        try {
+            String projectPath = System.getProperty("user.dir");					//获取当前eclipse工程路径
+            String classPath = this.getClass().getResource("/").toString();			//获取当前classPath
+//			String classPath = this.getClass().getClassLoader().getResource("");	//获取当前classPath等同上一行代码
+            String classFullPath = this.getClass().getResource("").toString();		//获取当前类基于classPath的完整路径
+
+           // System.out.println(projectPath);
+           // System.out.println(classPath);
+            System.out.println(classFullPath);
+//            System.out.println(classFullPath.indexOf("data"));
+            System.out.println(classFullPath.substring(6, classFullPath.indexOf("target")));
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+
     }
 }

@@ -29,4 +29,8 @@ public class CustomerDetailsService {
         Long id = cd.getCustomerId();
         cdr.updateByCustomerId(realname, sex, birthdate, location, id);
     }
+
+    public void updateHeadshotByCId(String filepath, Long id) {
+        cdr.updateHeadshotByCId(filepath, id);
+    }
 }

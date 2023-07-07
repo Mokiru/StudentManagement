@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
-import java.util.Locale;
-
-
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
@@ -26,11 +22,21 @@ public class CustomerController {
     @Autowired
     private CustomerDetailsService cds; // customerDetails      Service
 
+    @GetMapping("/sign/in")
+    public String signInPage() {
+        return "index";
+    }
+
     @PostMapping("/sign/in")
     public String signInAction(Customer c, RedirectAttributes ra, String captcha, HttpSession session) {
+        if (session.getAttribute("Customer") != null) {
+            return "redirect:/customer/sign/out";
+        }
         String un = c.getUsername(); // 用户账号
         String pwd = c.getPassword(); // 用户密码
         CustomerDetails cd = new CustomerDetails(); // 用户详细信息
+
+        //验证码不分 大小写
         String code = (String)session.getAttribute("CAPTCHA"); // 获取 验证码
         String code2 = code.toLowerCase();
         String code3 = code.toUpperCase();
@@ -58,12 +64,15 @@ public class CustomerController {
         String check = service.encrypt(pwd, salt);
 
         if (check.equals(allc.getPassword())) {
-            if (cd != null) {
-                session.setAttribute("CustomerDetails", cd);
-            }
-            session.setAttribute("Customer", c);
+
+            session.setAttribute("CustomerDetails", cd); // CustomerDetails
+            session.setAttribute("Customer", c); // Customer
+            session.setAttribute("id", allc.getId()); // Customer id
+            if (cd != null) session.setAttribute("headshot", cd.getHeadshot());
             return "redirect:/customer/mainPage";
+
         }
+
         ra.addFlashAttribute("message", "用户名或密码有误");
         return "redirect:/";
     }
@@ -109,6 +118,8 @@ public class CustomerController {
         session.removeAttribute("Customer");
         session.removeAttribute("usernmae");
         session.removeAttribute("password");
+        session.removeAttribute("id");
+        session.removeAttribute("headshot");
         return "redirect:/";
     }
 }

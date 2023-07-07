@@ -2,18 +2,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>修改</title>
+    <title>个人信息</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/styles/sign.css">
+    <link href="/assets/layui/css/layui.css" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <form action = "/customer/details/update" method = "post" th:object="${session.CustomerDetails}">
-            <input type="text" placeholder="用户名" th:value="*{realname}" name="realname">
-            <input type="text" placeholder="性别" th:value="*{sex}" name="sex">
-            <input type="date" min="1970-01-01" max="2099-12-31" th:value="*{birthdate}" name="birthdate">
-            <input type="text" placeholder="住址" th:value="*{location}" name="location">
-            <input type="hidden" th:value="*{customerId}" name="customerId">
-            <button type="submit">修改</button>
-        </form>
+
+    <div class="row details layui-anim-down">
+        <div class="col-6 sign-form">
+
+            <p class="title">个人信息</p>
+            <!-- /*/ 显示提示信息 /*/ -->
+            <p th:text="${message}" class="tip"></p>
+
+            <form action="/customer/details/update" method="post" th:object="${session.CustomerDetails}">
+
+                <div class="mb-3">
+                    <label for="realname" class="form-label">Username</label>
+                    <input type="text" name="realname" th:value="*{realname}" placeholder="昵称" autocomplete="off"  tabindex="1" aria-describedby="nameHelp" class="form-control" id="realname">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Input4" class="form-label">Sex</label>
+                    <select class="form-select" aria-label="Default select example" name="sex" id="Input4" th:value="*{sex}">
+                        <option selected th:if="*{sex eq '女'}" value="女">女</option>
+                        <option selected th:if="*{sex eq '男'}" value="男">男</option>
+                        <option th:if="*{sex eq '女'}"  value="男">男</option>
+                        <option th:if="*{sex eq '男'}" value="女">女</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" id="location" name="location" autocomplete="off"  tabindex="2" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="birthdate" class="form-label">BirthDate</label>
+                    <input type="date" id="birthdate" name="birthdate" th:value="*{birthdate}">
+                </div>
+
+                <input type="hidden" th:value="*{customerId}" name="customerId">
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-primary">修改</button>
+                </div>
+
+            </form>
+            <form action="/customer/upload-pre" method="post" enctype="multipart/form-data" >
+                <div class="mb-3">
+                    <label for="name" class="form-label">GraphName</label>
+                    <input type="text" id="name" name="name" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="photo" class="form-label">BirthDate</label>
+                    <input type="file" id="photo" name="photo" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-outline-success">上传</button>
+            </form>
+        </div>
+
+        <div class="col-6">
+            <img th:src="@{'/assets/images/User/'+${session.headshot}}" height="50%" width="50%" alt="没有图片">
+        </div>
     </div>
+
 </body>
 </html>
