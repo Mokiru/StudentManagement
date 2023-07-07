@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+/* class selector (class选择器) */
+.sign {
+    width: 600px;
+    box-shadow: 0 0 30px -15px #363636;
+    margin: 15vh auto ;
+}
+
+.sign-logo {
+    height: 360px;
+    /* 此处使用相对路径，相对于当前CSS文件所在路径确定图片文件 */
+    background: url( '../images/logo.webp' ) no-repeat center ;
+    background-size: 150%;
+}
+
+.sign-form {
+    border-left: 1px solid #dfdfdf ;
+}
+
+/* 后代选择器 (注意 祖先 和 后代 之间用空格隔开) */
+.sign-form .title {
+    text-align: center ;
+    font-size: 18px;
+    text-shadow: 0 0 1px blue;
+    margin: 10px auto ;
+}
+
+/* 后代选择器 */
+.sign-form .tip {
+    font-size: 14px ;
+    text-align: center;
+    background: #ffa5a5;
+    margin: 5px ;
+}
+
+/* 选择器组 (注意，中间用 逗号 隔开)*/
+.sign-form .form-row ,
+.sign-form .form-row-captcha {
+    display: flex ;
+    border: 1px solid #dedede ;
+    margin: 5px ;
+}
+
+.sign-form .form-row:last-child {
+    border: none ;
+}
+
+.sign-form .form-row>i {
+    flex-basis: 36px ;
+    height: 36px ;
+    line-height: 36px ;
+    text-align: center ;
+    color: #aaa;
+    font-size: 14px ;
+}
+
+.sign-form .form-row>input {
+    flex-basis: 192px ;
+    border: none ;
+    outline: none ;
+    font-size: 14px ;
+}
+
+.sign-form .form-row>button {
+    width: 100%;
+}
+
+.sign-form .form-row-captcha>input {
+    flex-basis: 132px ;
+    width: 130px;
+    border: none ;
+    outline: none ;
+    text-align: center ;
+    font-size: 14px ;
+}
+
+.sign-form .form-row-captcha>img {
+    flex-basis: 132px ;
+    width: 132px ;
+    cursor: pointer ;
+}
+
+.sign-form .link {
+    line-height: 50px ;
+    text-align: right ;
+    font-size: 14px ;
+    margin: 5px ;
+}
+.sign-form .link a {
+    text-decoration: none ;
+}

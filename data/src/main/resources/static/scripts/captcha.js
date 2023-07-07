@@ -1,9 +1,10 @@
+
 // 定义CSS选择器
 const cssSelector = '.sign-form .form-row-captcha>img' ;
 // 根据 CSS 选择器选择匹配于该选择器的第一个元素
 const img = document.querySelector( cssSelector );
 // 为 img 设置 title 属性
-img.setAttribute( "title" , "点我刷新")
+img.setAttribute( "o" , "点我刷新")
 
 const type = 'click' ;
 

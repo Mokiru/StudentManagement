@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 @Data
 @Table("t_customers")
-public class Customer {
+public class Customer {  // 用户 登录数据
     @Id
     private Long id;
 

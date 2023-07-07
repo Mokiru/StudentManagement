@@ -36,6 +36,7 @@ public class CustomerController {
             ra.addFlashAttribute("message", "账号不能为空");
             return "redirect:/";
         }
+
         session.setAttribute("username", un);
         Customer allc = service.findByUsername(un);
 
@@ -55,13 +56,9 @@ public class CustomerController {
 
         if (check.equals(allc.getPassword())) {
             if (cd != null) {
-                session.setAttribute("realname", cd.getRealname());
-                session.setAttribute("sex", cd.getSex());
-                session.setAttribute("birthdate", cd.getBirthdate());
-                session.setAttribute("location", cd.getLocation());
-                session.setAttribute("like", cd.getLike());
-                session.setAttribute("id", allc.getId());
+                session.setAttribute("CustomerDetails", cd);
             }
+            session.setAttribute("Customer", c);
             return "redirect:/customer/mainPage";
         }
         ra.addFlashAttribute("message", "用户名或密码有误");
@@ -75,6 +72,7 @@ public class CustomerController {
     public String signUpAction(Customer c, CustomerDetails cd, RedirectAttributes ra, HttpSession session) {
         String un = c.getUsername();
         String pwd = c.getPassword();
+        session.setAttribute("Customer", c);
         if (un == null || (un = un.trim()).isEmpty()) {
             ra.addFlashAttribute("message", "用户名不能为空");
             return "redirect:/customer/sign/up";
@@ -83,12 +81,10 @@ public class CustomerController {
             ra.addFlashAttribute("message", "用户名已经被占用");
             return "redirect:/customer/sign/up";
         }
-        session.setAttribute("username", un);
         if (pwd == null || (pwd = pwd.trim()).isEmpty()) {
             ra.addFlashAttribute("message", "密码不能为空");
             return "redirect:/customer/sign/up";
         }
-        session.setAttribute("password", pwd);
         service.save(c);
         cd.setCustomerId(c.getId());
         cds.save(cd);
@@ -96,13 +92,20 @@ public class CustomerController {
     }
 
     @RequestMapping("/mainPage")
-    public String getMainPage() {
+    public String getMainPage(HttpSession session, RedirectAttributes attr) {
+        if (session.getAttribute("Customer") == null || session.getAttribute("CustomerDetails") == null) {
+            attr.addFlashAttribute("message", "请先登录");
+            return "redirect:/";
+        }
         return "/customer/mainPage";
     }
 
     @RequestMapping("/sign/out")
     public String signOutAction(HttpSession session) {
-        session.invalidate();
+        session.removeAttribute("CustomerDetails");
+        session.removeAttribute("Customer");
+        session.removeAttribute("usernmae");
+        session.removeAttribute("password");
         return "redirect:/";
     }
 }

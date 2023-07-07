@@ -7,21 +7,18 @@
     <link rel="icon" href="/assets/images/logo.webp" type="image/x-icon">
 
     <link rel="shortcut icon" href="/assets/images/logo.webp" type="image/x-icon" media="screen">
+
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     -->
     <!-- 链接外部样式文件 -->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/assets/styles/sign.css">
 </head>
 <body>
-<fieldset>
-
-    <legend>
-        登录
-    </legend>
+<div>
     <div th:text="${message}"></div>
 
-    <form action = "/customer/sign/in" method="post">
+    <form action = "/customer/sign/in" method="post" >
         <input type = "text" name = "username" th:value = "${session.username}" placeholder="账号">
         <input type = "password" name = "password"  placeholder="密码">
 
@@ -30,11 +27,11 @@
             <img src="/graphic/image/sign/up">
        <!--     <p th:value="${session.CAPTCHA}"></p> -->
         </div>
-        <script src="/assets/scripts/captcha.js"></script>
         <button type = "submit">登录</button>
+        <script src="/assets/scripts/captcha.js"></script>
         <a href = "/customer/sign/up">注册</a>
     </form>
 
-</fieldset>
+</div>
 </body>
 </html>
