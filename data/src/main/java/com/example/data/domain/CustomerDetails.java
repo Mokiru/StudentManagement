@@ -21,7 +21,6 @@ public class CustomerDetails { // 用户详细信息
     private LocalDate birthdate;
 
     private String location;
-    private String like;
 
     private Long customerId;
 

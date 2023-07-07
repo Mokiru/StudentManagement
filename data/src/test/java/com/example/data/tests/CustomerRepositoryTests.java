@@ -90,9 +90,8 @@ public class CustomerRepositoryTests {
         String like = "[Bike, Car]";
         cd.setRealname(realname);
         cd.setSex(sex);
-        cd.setLike(like);
         cd.setLocation(location);
         cd.setBirthdate(birthdate);
-        cdr.updateByCustomerId(realname, sex, birthdate, location, like, 9L);
+        cdr.updateByCustomerId(realname, sex, birthdate, location, 9L);
     }
 }

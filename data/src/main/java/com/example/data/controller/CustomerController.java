@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 
 @Controller
@@ -31,6 +32,8 @@ public class CustomerController {
         String pwd = c.getPassword(); // 用户密码
         CustomerDetails cd = new CustomerDetails(); // 用户详细信息
         String code = (String)session.getAttribute("CAPTCHA"); // 获取 验证码
+        String code2 = code.toLowerCase();
+        String code3 = code.toUpperCase();
 
         if (un == null || (un = un.trim()).isEmpty()) { // 账号判断
             ra.addFlashAttribute("message", "账号不能为空");
@@ -45,7 +48,7 @@ public class CustomerController {
             return "redirect:/";
         }
 
-        if ( !captcha.equals(code) ) {
+        if ( !captcha.equals(code) && !captcha.equals(code2) && captcha.equals(code3)) {
             ra.addFlashAttribute("message", "验证码错误");
             return "redirect:/";
         }

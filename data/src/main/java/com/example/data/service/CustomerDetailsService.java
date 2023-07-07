@@ -26,8 +26,7 @@ public class CustomerDetailsService {
         String sex = cd.getSex();
         LocalDate birthdate = cd.getBirthdate();
         String location = cd.getLocation();
-        String like = cd.getLike();
         Long id = cd.getCustomerId();
-        cdr.updateByCustomerId(realname, sex, birthdate, location, like, id);
+        cdr.updateByCustomerId(realname, sex, birthdate, location, id);
     }
 }

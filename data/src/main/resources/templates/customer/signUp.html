@@ -2,25 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>注册</title>
+    <link rel="icon" href="/assets/images/logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/images/logo.webp" type="image/x-icon" media="screen">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/assets/styles/sign.css">
 </head>
 <body>
-  <fieldset>
-      <legend>
-          注册
-      </legend>
-      <p th:text="${message}"></p>
-      <form action="/customer/sign/up" method="post">
-          <input type="text" name="username" th:value = "${session.username}" placeholder="用户名">
-          <input type="password" name="password" th:value = "${session.password}" placeholder="密码">
-          <input type="text" name="realname" placeholder="姓名"><br>
-          <input type="radio" name="sex" value="male">男
-          <input type="radio" name="sex" value="female">女<br>
-          <input type="date" min="1970-01-01" max="2099-12-31" name="birthdate">
-          <input type="text" name="location" placeholder="住址">
-          <input type="text" name="like" placeholder="喜好">
-          <button type="submit">注册</button>
-      </form>
-  </fieldset>
+  <div class="row sign">
+      <div class="col-6 sign-logo"></div>
+      <div class="col-6 sign-form">
+          <p class="title">用户注册</p>
+          <!-- /*/ 显示提示信息 /*/ -->
+          <p th:text="${message}" class="tip"></p>
+          <form action="up" method="post">
+              <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" name="username" th:value="${session.username}" placeholder="账号" autocomplete="off"  tabindex="1" aria-describedby="emailHelp" class="form-control" id="username">
+              </div>
+              <div class="mb-3">
+                  <label for="InputPassword" class="form-label">Password</label>
+                  <input type="password" name="password" placeholder="密码" autocomplete="off"  tabindex="2" class="form-control" id="InputPassword">
+              </div>
+              <div class="mb-3">
+                  <label for="Input3" class="form-label">Name</label>
+                  <input type="text" name="realname" placeholder="昵称" autocomplete="off"  tabindex="2" class="form-control" id="Input3">
+              </div>
+              <div class="mb-3">
+                  <label for="Input4" class="form-label">Sex</label>
+                  <select class="form-select" aria-label="Default select example" name="sex" id="Input4">
+                      <option selected value="男">男</option>
+                      <option value="女">女</option>
+                  </select>
+              </div>
+              <div class="mb-3">
+                  <label for="birthdate" class="form-label">BirthDate</label>
+                  <input type="date" id="birthdate" name="birthdate">
+              </div>
+              <div class="mb-3">
+                  <label for="location" class="form-label">Location</label>
+                  <input type="text" id="location" name="location" autocomplete="off"  tabindex="2" class="form-control">
+              </div>
+              <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-outline-primary" >注册</button>
+              </div>
+          </form>
+      </div>
+  </div>
 </body>
 </html>
