@@ -137,6 +137,11 @@ public class CustomerRepositoryTests {
             ex.printStackTrace();
         }
 
+    }
 
+    @Test
+    public void testfindall() {
+        List<Car> carlist = cs.findAll();
+        System.out.println( carlist );
     }
 }

@@ -20,4 +20,8 @@ public class CarService {
     public List<Car> findByCarType(String cartype) {
         return cr.findByCarType("%" + cartype + "%");
     }
+
+    public List<Car> findAll() {
+        return cr.findAll();
+    }
 }

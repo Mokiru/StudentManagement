@@ -54,7 +54,7 @@ public class CustomerController {
             return "redirect:/";
         }
 
-        if ( !captcha.equals(code) && !captcha.equals(code2) && captcha.equals(code3)) {
+        if ( !captcha.equals(code) && !captcha.equals(code2) && !captcha.equals(code3)) {
             ra.addFlashAttribute("message", "验证码错误");
             return "redirect:/";
         }
@@ -63,13 +63,16 @@ public class CustomerController {
         String salt = allc.getSalt();
         String check = service.encrypt(pwd, salt);
 
+        System.out.println(code);
+        System.out.println(captcha);
+
         if (check.equals(allc.getPassword())) {
 
             session.setAttribute("CustomerDetails", cd); // CustomerDetails
             session.setAttribute("Customer", c); // Customer
             session.setAttribute("id", allc.getId()); // Customer id
             if (cd != null) session.setAttribute("headshot", cd.getHeadshot());
-            return "redirect:/customer/mainPage";
+            return "redirect:/car/list";
 
         }
 
@@ -114,12 +117,16 @@ public class CustomerController {
 
     @RequestMapping("/sign/out")
     public String signOutAction(HttpSession session) {
+
         session.removeAttribute("CustomerDetails");
         session.removeAttribute("Customer");
         session.removeAttribute("usernmae");
         session.removeAttribute("password");
         session.removeAttribute("id");
         session.removeAttribute("headshot");
+        session.removeAttribute("carlist");
+        session.removeAttribute("CAPTCHA");
+
         return "redirect:/";
     }
 }

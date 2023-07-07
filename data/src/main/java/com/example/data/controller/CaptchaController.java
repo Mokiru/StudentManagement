@@ -23,7 +23,6 @@ public class CaptchaController {
         String code = GraphicHelper.create(4, false, 180, 50, output, 50);
         // 将生成的验证码字符串设置到当前会话中
         session.setAttribute("CAPTCHA", code);
-        // System.out.println( session.getAttribute("CAPTCHA"));
         // 从字节数组输出流中获取字节内容
         final byte[] body = output.toByteArray();
         // 创建HTTP响应对象

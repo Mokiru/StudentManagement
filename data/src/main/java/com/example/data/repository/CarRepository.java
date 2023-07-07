@@ -14,4 +14,6 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
     @Query( "SELECT * FROM t_car WHERE cartype LIKE :cartype" )
     public List<Car> findByCarType(@Param("cartype") String cartype);
+
+    public List<Car> findAll();
 }

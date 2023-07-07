@@ -20,7 +20,7 @@
         <!-- /*/ 显示提示信息 /*/ -->
         <p th:text="${message}" class="tip"></p>
 
-        <form action="/customer/sign/in" method="post">
+        <form action="/customer/sign/in"  method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" name="username" th:value="${session.username}" placeholder="账号" autocomplete="off"  tabindex="1" aria-describedby="emailHelp" class="form-control" id="username">
