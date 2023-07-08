@@ -141,7 +141,7 @@ public class CustomerRepositoryTests {
 
     @Test
     public void testfindall() {
-        List<Car> carlist = cs.findAll();
+        List<Car> carlist = cs.findAllAboutPCP();
         System.out.println( carlist );
     }
 }

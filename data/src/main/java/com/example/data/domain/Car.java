@@ -20,4 +20,5 @@ public class Car {
 
     private String color; // 颜色
 
+    private String photo; // 图片
 }

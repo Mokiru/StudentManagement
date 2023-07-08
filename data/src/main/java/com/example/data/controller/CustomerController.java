@@ -63,8 +63,8 @@ public class CustomerController {
         String salt = allc.getSalt();
         String check = service.encrypt(pwd, salt);
 
-        System.out.println(code);
-        System.out.println(captcha);
+//        System.out.println(code);
+//        System.out.println(captcha);
 
         if (check.equals(allc.getPassword())) {
 
@@ -72,7 +72,7 @@ public class CustomerController {
             session.setAttribute("Customer", c); // Customer
             session.setAttribute("id", allc.getId()); // Customer id
             if (cd != null) session.setAttribute("headshot", cd.getHeadshot());
-            return "redirect:/car/list";
+            return "redirect:/car/list"; //获取主页 车辆信息
 
         }
 

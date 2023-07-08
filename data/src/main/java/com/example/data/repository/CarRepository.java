@@ -15,5 +15,16 @@ public interface CarRepository extends CrudRepository<Car, Long> {
     @Query( "SELECT * FROM t_car WHERE cartype LIKE :cartype" )
     public List<Car> findByCarType(@Param("cartype") String cartype);
 
+    @Query( "SELECT * FROM t_car WHERE price < :price AND carclass=:carclass " )
+    public List<Car> findAllAboutPCP(@Param("price") Long price, @Param("carclass") String carclass); // 限制价格 和 车型
+
+    @Query( "SELECT * FROM t_car WHERE price < 200000 AND carclass=:carclass" )
+    public List<Car> findAllAboutC(@Param("carclass") String carclass); // 不限价格 限制 车型
+
+    @Query( "SELECT * FROM t_car WHERE price < :price" )
+    public List<Car> findAllAboutP(@Param("price") Long price); // 限制 价格 不限 车型
+
+    @Query( "SELECT * FROM t_car" )
     public List<Car> findAll();
+
 }

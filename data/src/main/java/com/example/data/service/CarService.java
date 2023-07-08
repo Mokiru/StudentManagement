@@ -21,7 +21,19 @@ public class CarService {
         return cr.findByCarType("%" + cartype + "%");
     }
 
-    public List<Car> findAll() {
+    public List<Car> findAllAboutPCP(Long price, String carclass) {
+        return cr.findAllAboutPCP(price, carclass);
+    }
+
+    public List<Car> findAllAboutC(String carclass) {
+        return cr.findAllAboutC(carclass);
+    }
+
+    public List<Car> findAllAboutP(Long price) {
+        return cr.findAllAboutP(price);
+    }
+
+    public List<Car> findAllAboutPCP() {
         return cr.findAll();
     }
 }
