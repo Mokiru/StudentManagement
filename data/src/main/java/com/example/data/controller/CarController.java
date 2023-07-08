@@ -21,6 +21,7 @@ public class CarController {
         List<Car> carlist = new ArrayList<>();
         carlist = cs.findAll();
         session.setAttribute("carlist", carlist);
+        session.getAttribute("carlist").;
         return "redirect:/customer/mainPage";
     }
 

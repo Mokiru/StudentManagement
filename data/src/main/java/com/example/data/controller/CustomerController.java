@@ -63,8 +63,8 @@ public class CustomerController {
         String salt = allc.getSalt();
         String check = service.encrypt(pwd, salt);
 
-        System.out.println(code);
-        System.out.println(captcha);
+//        System.out.println(code);
+//        System.out.println(captcha);
 
         if (check.equals(allc.getPassword())) {
 
