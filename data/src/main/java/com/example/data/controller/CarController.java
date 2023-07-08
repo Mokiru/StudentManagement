@@ -4,9 +4,7 @@ import com.example.data.domain.Car;
 import com.example.data.service.CarService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -19,23 +17,9 @@ public class CarController {
     CarService cs;
 
     @RequestMapping("/list")
-    public String eachlist(Long price, String carclass, HttpSession session) {
+    public String eachlist(HttpSession session) {
         List<Car> carlist = new ArrayList<>();
-        System.out.println( session.getAttribute("price") );
-        System.out.println( session.getAttribute("carclass") );
-//        if (price != null) {
-//            session.setAttribute("price", price);
-//        }
-//        if (carclass != null) {
-//            session.setAttribute("carclass", carclass);
-//        }
-//
-//        if (price != null && carclass != null) {
-//            carlist = cs.findAllAboutPCP(price, carclass);
-//        }
-        carlist = cs.findAllAboutPCP();
-
-
+        carlist = cs.findAll();
         session.setAttribute("carlist", carlist);
         // object -> List<Car>
 //        Class<Car> cla = Car.class;
@@ -47,6 +31,7 @@ public class CarController {
 //        }
 //        System.out.println(list);
 
+        session.getAttribute("carlist").;
         return "redirect:/customer/mainPage";
     }
 //
