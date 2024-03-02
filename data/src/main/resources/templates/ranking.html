@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>宿舍信息</title>
+    <style type="text/css">
+        #a1{
+            width: 30%;
+            height: 90px;
+            float: left;
+        }
+        #a4{
+            width: 70%;
+            height: 90px;
+            float: right;
+            text-align: left;
+        }
+        #f1{
+            padding-left: 20%;
+        }
+        #s1{
+            width: 200px;
+            height: 40px;
+            border: 1px solid #6495ED;
+            border-radius: 6px 6px 6px 6px;
+        }
+        #submit{
+            border-radius: 3px 3px 3px 3px;
+            width: 60px;
+            height: 40px;
+            font-size: large;
+            background-color: #6495ED;
+            border: #6495ED;
+        }
+        #t1{
+            width: 100%;
+            height: 500px;
+        }
+        #tab1{
+            width: 100%;
+            text-align: center;
+            border-color: #6495ED;
+            border: 0px solid #6495ED;
+        }
+        th{
+            border: 1px solid aliceblue;
+        }
+        th{
+            width: 230px;
+            height: 40px;
+        }
+        tr:hover{
+            background-color: #999999;
+        }
+        td{
+            width: 230px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.2);
+        }
+        #td{
+            border: 3px solid #000000;
+            width: 60px;
+            height: 40px;
+            background-color: #6495ED;
+        }
+        #A2{
+            height: 40px;
+            text-decoration: none;
+            background-color: #6495ED;
+            border: 3px solid #000000;
+            color: #F0F8FF;
+            margin-left: 12%;
+            padding: 8px 8px 8px 8px;
+            border-radius: 7px 7px 7px 7px;
+        }
+        a:hover{
+            color: #000000;
+        }
+        #addinfo{
+            width: 400px;
+            text-align: left;
+            float: left;
+            z-index: 3;
+            background-color: white;
+            position: absolute;
+            left: 25%;
+            top: 18%;
+            border-radius: 27px 27px 27px 27px;
+        }
+        #form1{
+            font-size: larger;
+            padding-left: 20px;
+            text-align: center;
+        }
+        input{
+            width: 65%;
+            height: 25px;
+            border-radius: 6px 6px 6px 6px;
+            margin-top: 10px;
+        }
+        #btn_add :hover{
+            color: #999999;
+        }
+        #btn_add{
+            color: white;
+        }
+        #btn_update,#btn_ext,#btn_add{
+            width: 120px;
+            height: 40px;
+            border-radius: 6px 6px 6px 6px;
+            margin:0 auto;
+            background-color: #6495ED;
+        }
+        #span1{
+            width: 20px;
+            font-size: x-large;
+            line-height: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="a1">
+</div>
+<div id="a3">
+</div>
+<div id="a4">
+    <form action="/ranking/search" method="post" id="f1">
+        <input type="search" name="sea" id="s1" placeholder="请输入查询学生学号"/>
+        <input type="submit" value="搜索" id="submit"/>
+    </form>
+
+</div>
+<div id="t1">
+    <table border="1" cellspacing="0" cellpadding="" id="tab1">
+        <tr bgcolor="#6495ED">
+            <th>编号</th>
+            <th>学号</th>
+            <th>总分</th>
+        </tr>
+        <tr th:each="rankmap, stat:${session.Ranking}">
+            <td th:text="${stat.count}" ></td>
+            <td th:text="${rankmap.key}"></td>
+            <td th:text="${rankmap.value}" ></td>
+        </tr>
+    </table>
+</div>
+</body>
+
+<script type="text/javascript">
+    window.onload = function(){
+        var box = document.getElementById("addinfo");
+        var box1=document.getElementById("h4");
+        var box2=document.getElementById("aa2")
+        box1.onmousedown = function(){
+            document.onmousemove = function(event){
+                event = event || window.event;
+                var left = event.clientX;
+                var top = event.clientY;
+                box.focus();
+                box.style.left = left +"px";
+                box.style.top = top +"px";
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                };
+            };
+        };
+    };
+    //----清除添加信息框的内容-----
+    function cleanAddInput(){
+        document.getElementById('did').value = '';
+        document.getElementById('classn').value = '';
+        document.getElementById('stuname').value = '';
+        document.getElementById('buildnum').value = '';
+        document.getElementById('dormnum').value = '';
+    }
+    //----清除添加信息框的内容-----
+
+    //----显示添加信息框-----
+    function showAddInput(){
+        document.getElementById('addinfo').style="display:block-inline" ;
+        document.getElementById('btn_add').style="display:block-inline" ;
+        document.getElementById('btn_update').style="display:none" ;
+        cleanAddInput();
+    }
+    //----显示添加信息框-----
+
+    //----隐藏添加信息框-----
+    function hideAddInput(){
+        document.getElementById('addinfo').style="display:none" ;
+    }
+    //----隐藏添加信息框-----
+
+
+    //----根据行号修改信息-----
+    function updateRow(r){
+        console.log(r);
+        showAddInput(); //显示修改表单
+        //提交按钮替换
+        document.getElementById('btn_add').style="display:none" ;
+        document.getElementById('btn_update').style="display:block-inline" ;
+        document.getElementById('classn').value = document.getElementById("classn" + r).innerHTML;
+        document.getElementById('stuname').value = document.getElementById("stuname" + r).innerHTML;
+        document.getElementById('buildnum').value = document.getElementById("buildnum" + r).innerHTML;
+        document.getElementById('dormnum').value = document.getElementById("dormnum" + r).innerHTML;
+        document.getElementById('did').value = r;
+    }
+    //----根据行号修改信息-----
+</script>
+</html>

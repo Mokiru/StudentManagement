@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>成绩信息</title>
+		<style type="text/css">
+			#a1{
+				width: 30%;
+				height: 90px;
+				float: left;
+			}
+			#a2{
+				width: 55%;
+				height: 40px;
+				float: left;
+				text-align: right;
+				padding-top: 35px;
+			}
+			#t1{
+				width: 100%;
+				height: 500px;
+			}
+			#table{
+				width: 100%;
+				text-align: center;
+				border-color: #6495ED;
+				border: 0px solid #6495ED;
+			}
+			.table{
+				width: 80%;
+				float: left;
+			}
+			#addinfo{
+				width: 400px;
+				height: 320px;
+				text-align: left;
+				float: left;
+				z-index: 3;
+				background-color: white;
+				position: absolute;
+				left: 25%;
+				top: 18%;
+				border-radius: 27px 0px 27px 27px;
+			}
+			th{
+				border: 1px solid ghostwhite;
+			}
+			th{
+				height: 40px;
+				background-color: #6495ED;
+			}
+			td{
+				border: 1px solid floralwhite;
+				height: 30px;
+				background-color: rgba(255,255,255,0.2);
+			}
+			tr:hover{
+				background-color: #999999;
+				height: 37px;
+			}
+			#td{
+				border: 3px solid #000000;
+				width: 60px;
+				height: 40px;
+				background-color: #6495ED;
+			}
+			#add{
+				width: 140px;
+				height: 40px;
+				text-decoration: none;
+				background-color: #6495ED;
+				border: 3px solid #000000;
+				color: #F0F8FF;
+				padding:10px 10px 10px 10px;
+				margin-right: 10%;
+			}
+			#add:hover{
+				color: #000000;
+			}
+			select{
+				height: 40px;
+				border: 2px solid #000000;
+				border-radius: 3px 3px 3px 3px;
+				margin-right: 40px;margin-left: 20px;
+			}
+			#form1{
+				font-size: larger;
+				padding-left: 20px;
+			}
+			input{
+				width: 85%;
+				height: 25px;
+				border-radius: 6px 6px 6px 6px;
+				margin-top: 10px;
+			}
+			#btn_update,#btn_ext,#btn_add{
+				width: 120px;
+				height: 40px;
+				border-radius: 6px 6px 6px 6px;
+				margin:0 auto;
+				background-color: #6495ED;
+			}
+			#btn_add{
+				color: white;
+			}
+			#btn_ext{
+				color: white;
+			}
+			#btn_add :hover{
+				color: #999999;
+			}
+			#btn_ext :hover{
+				color: antiquewhite;
+			}
+			#xiu{
+				border-radius: 3px 3px 3px 3px;
+				padding: 5px;
+			}
+			#xiu:hover{
+				color: #BD0A01;
+			}
+			#xiu2{
+				border-radius: 3px 3px 3px 3px;
+				border: 1px solid bisque;
+				padding: 5px;
+				background-color:springgreen;
+			}
+			#xiu2:hover{
+				color: #BD0A01;
+			}
+			#h4{
+				width: 94%;
+				float: left;
+				padding-top: 15px;
+				font-size: larger;
+				height: 30px;
+				padding-left: 0px;
+				border-radius: 0px 0px 50% 50%/0px 0px 40px 40px;
+				background-color: #6495ED;
+			}
+			#h3{
+				width: 5%;
+				float: right;
+				height: 20px;
+				padding:0;
+				text-align: right;
+				margin: 0 auto;
+			}
+			/* #h2{width: 100%;float: left;height: 40px;border-radius: 0px 0px 50% 50%/0px 0px 30px 30px;background-color: #6495ED;} */
+			#span1{
+				width: 20px;
+				font-size: x-large;
+				line-height: 10px;
+			}
+			#h3 :hover{
+				background-color: #DCDCDC;
+			}
+			#aa2{
+				float: left;
+				width: 15%;
+			}
+			#aa3{
+				width: 80%;
+				height: 320px;
+				float: left;
+			}
+			#shu{
+				height: 320px;
+			}
+			.a10 .a9{
+				width: 70px;
+				height: 20px;
+				background-color: #fff;
+				position: absolute;
+				left:200px;
+				bottom:0px;
+			}
+			.a10{
+				width: 100%;
+				height: 50px;
+				margin-top: 0px;
+				background-color:#dcdcdc;
+				float: left;
+				font-size:larger;
+				padding-left:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="a1">
+		</div>
+		<div id="a3">
+			
+		</div>
+		<div id="a2">
+			<form action="/gradeinfo/select" method="post" style="text-align: left">
+				<select name="gradechoice">
+					<option value="All">全部</option>
+					<option th:each="subj, stat:${session.sublist}" th:value="${subj.name}" th:text="${subj.name}"></option>
+				</select>
+				<button type="submit">筛选</button>
+			</form>
+		</div>
+		<div class="table" >
+		 <table border="1" style="text-align:center" id="table" cellspacing="0">
+			 <tr>
+				 <th>编号</th>
+				 <th>课程名</th>
+				 <th>学号</th>
+				 <th>成绩</th>
+			 </tr>
+			 <tr>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td><a onclick="javascript:showAddInput();" id="xiu">添加信息</a></td>
+			 </tr>
+			 <tr th:each="gradeinfo, stat:${session.gradeinfoList}">
+				 <td th:text="${stat.count}"></td>
+				 <td th:text="${gradeinfo.subject}"></td>
+				 <td th:text="${gradeinfo.stuid}"></td>
+				 <td th:text="${gradeinfo.grade}"></td>
+			 </tr>
+		 </table>
+		</div>
+		<div id="addinfo" style="display: none;">
+			<form action="/gradeinfo/add" method="post" id="form1">
+			 <center><div id="h4"> <b>请添加信息</b></div></center><div id="h3">
+			 	<span style=" color: black;cursor:pointer;" onclick="hideAddInput()" id="span1">×</span> 
+			 </div> <br><center>
+			 <input type="hidden" id="bid" name="id"/><br>
+			 <input type="text" id="name" name="subject" placeholder="请输入课程名"/><br>
+			 <input type="text" id="stuid" name="stuid" placeholder="请输入学号"/><br>
+			 <input type="text" id="grade" name="grade" placeholder="请输入成绩"/><br>
+			 <br><var></var>
+			 <input type="submit" value="提交" id="btn_add" >
+<!--			 <input type="button" value="提交" onclick="updateInfo()" style="display:none" id="btn_update">-->
+			 <input type="button" value="取消" onclick="hideAddInput()" id="btn_ext"></center>
+			</form>
+		</div>
+		<script type="text/javascript">
+		var row = 0 ; //定义全局行数用于修改
+		var reg_s=/^[1-9]{1,2}\d?$/;
+		//----获取行号-----
+		function getRow(r){
+		 var i=r.parentNode.parentNode.rowIndex; 
+		 return i ;
+		}
+		//----获取行号-----
+		 
+		//----删除某一行-----
+		function delRow(r){ 
+		 document.getElementById('table').deleteRow(getRow(r));
+		}
+		//----删除某一行-----
+		 
+		//----清除添加信息框的内容-----
+		function cleanAddInput(){
+		 document.getElementById('bid').value='';
+		 document.getElementById('name').value='';
+		 document.getElementById('stuid').value='';
+		 document.getElementById('grade').value='';
+		}
+		//----清除添加信息框的内容-----
+		 
+		//----显示添加信息框-----
+		function showAddInput(){
+		 document.getElementById('addinfo').style="display:block-inline" ;
+		 document.getElementById('btn_add').style="display:block-inline" ;
+		 document.getElementById('btn_update').style="display:none" ;
+		 cleanAddInput(); 
+		}
+		//----显示添加信息框-----
+		 
+		//----隐藏添加信息框-----
+		function hideAddInput(){
+		 document.getElementById('addinfo').style="display:none" ;
+		 
+		}
+		//----隐藏添加信息框-----
+		</script>
+	</body>
+</html>

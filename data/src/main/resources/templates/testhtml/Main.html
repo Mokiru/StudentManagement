@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<input id="need" type="text">
+<button id="test"></button>
+<div style="width: 80%;height: 550px;float: left;margin-left: 5px; box-shadow: 0px 0px 35px 0px #DDDDDD;z-index: 0;" id="allpage">
+    <iframe id="myframe" src="/kiruya/right.html"></iframe>
+</div>
+
+</body>
+<script>
+    $("document").ready(function (){
+        $("#test").click(function() {
+            let u = $("#need").val();
+            $.ajax({
+                url: "/login/test",
+                contentType:"application/x-www-form-urlencoded",
+                type:"post",
+                data:{
+                    u:u
+                },
+                success:function(res){
+                    let url1 = "/kiruya/right"+res['index']+".html";
+                    var iframe = $("#myframe");
+                    iframe.attr('src', url1);
+                }
+            });
+        });
+
+    });
+
+</script>
+</html>

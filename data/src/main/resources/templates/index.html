@@ -1,44 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>用户登录</title>
-    <link rel="icon" href="/assets/images/logo.webp" type="image/x-icon">
-
-    <link rel="shortcut icon" href="/assets/images/logo.webp" type="image/x-icon" media="screen">
-    <!-- 链接外部样式文件 -->
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/assets/styles/sign.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/kiruya/css/need.css">
 </head>
-<body>
-<div class="row sign">
-    <div class="col-6 sign-logo"></div>
-    <div class="col-6 sign-form">
-        <p class="title">用户登录</p>
-        <!-- /*/ 显示提示信息 /*/ -->
-        <p th:text="${message}" class="tip"></p>
 
-        <form action="/customer/sign/in"  method="post">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" name="username" th:value="${session.username}" placeholder="账号" autocomplete="off"  tabindex="1" aria-describedby="emailHelp" class="form-control" id="username">
-            </div>
-            <div class="mb-3">
-                <label for="InputPassword" class="form-label">Password</label>
-                <input type="password" name="password" placeholder="登录密码" autocomplete="off"  tabindex="2" class="form-control" id="InputPassword">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="text3">Captcha</label>
-                <input type="text" name="captcha" placeholder="验证码" autocomplete="off"  tabindex="3" class="form-control" id="text3">
-                <img src="/graphic/image/sign/in">
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-outline-primary">登录</button>
-            </div>
-        </form>
-        <p class="link">没有账号？<a href="/customer/sign/up">点此注册</a></p>
+<body>
+
+<div class="shell">
+    <h2 class="title">Login</h2>
+    <form action="/login/make" method="post">
+        <input type="text" id="username" placeholder="Username" name="username">
+        <input type="password" id="password" placeholder="Password" name="password">
+        <input type="submit" value="Login" id="loginBtn">
+    </form>
+
+    <div class="footer">
+        <p id="message" th:text="${session.message}"></p>
+        <p th:text="${msg}"></p>
     </div>
 </div>
 

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>用户信息</title>
+		<style type="text/css">
+			#a1{
+				width: 50%;
+				height: 90px;
+				float: left;}
+			#a3{
+				width: 50%;
+				height: 50px;
+				float: left;
+				text-align: right;
+			}
+			#a2{
+				width: 50%;
+				height: 40px;
+				float: left;
+				text-align: right;
+			}
+			#t1{
+				width: 100%;
+				height: 500px;
+			}
+			#tab1{
+				width: 100%;
+				text-align: center;
+			}
+			th{
+				width: 230px;
+				height: 40px;
+				background-color: #6495ED;
+				border: 2px solid #DCDCDC;
+			}
+			td{
+				width: 230px;
+				height: 40px;
+				border: 2px solid #DCDCDC;
+				background-color: rgba(255,255,255,0.2);
+			}
+			tr:hover{
+				background-color: #999999;
+			}
+			#td{
+				border: 3px solid #000000;
+				width: 60px;
+				height: 40px;
+				background-color: #6495ED;
+			}
+			#A2{
+				width: 140px;
+				height: 40px;
+				text-decoration: none;
+				background-color: #6495ED;
+				border: 3px solid #000000;
+				color: #F0F8FF;
+				padding:10px 10px 10px 10px;
+				margin-right: 12%;
+			}
+			a:hover{
+				color: #000000;
+			}
+			#addinfo{
+				width: 400px;
+				height: 320px;
+				text-align: left;
+				float: left;
+				z-index: 3;
+				background-color: white;
+				position: absolute;
+				left: 25%;
+				top: 18%;
+				border-radius: 27px 27px 27px 27px;
+			}
+			#form1{
+				font-size: larger;
+				padding-left: 20px;
+				text-align: center;
+			}
+			input{
+				width: 65%;
+				height: 25px;
+				border-radius: 6px 6px 6px 6px;
+				margin-top: 10px;
+			}
+			#btn_add :hover{
+				color: #999999;
+			}
+			#btn_add{
+				color: white;
+			}
+			#btn_update,#btn_ext,#btn_add{
+				width: 120px;
+				height: 40px;
+				border-radius: 6px 6px 6px 6px;
+				margin:0 auto;
+				background-color: #6495ED;
+			}
+			#span1{
+				width: 20px;
+				font-size: x-large;
+				line-height: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="a1">
+		</div>
+		<div id="a3">
+			
+		</div>
+		<div id="a2">
+			<a href="#" onclick="showAddInput()" id="A2">添加用户</a>
+		</div>
+		<div id="t1">
+		<table border="0" cellspacing="0" cellpadding="" id="tab1">
+			<tr>
+				<th>学号</th>
+				<th>操作</th>
+			</tr>
+			<tr th:each="userinfo, stat:${session.userinfoList}">
+				<td th:text="${userinfo.stuid}"></td>
+				<td><a style="color:chocolate;cursor:pointer;" th:href="@{'/userinfo/delete/' + ${userinfo.id}}">删除</a></td>
+			</tr>
+		</table>
+		</div>
+		<div id="addinfo" style="display: none;" title="点击鼠标以固定，滑动鼠标拖动">
+			<form action="/userinfo/add" method="post" id="form1">
+				<center>
+					<div id="h4"> <b>请添加信息</b></div></center><div id="h3">
+				<span style=" color: black;cursor:pointer;" onclick="hideAddInput()" id="span1">×</span>
+			</div> <br>
+				<input type="text" id="stuid" name="stuid" placeholder="请输入学号" /><br>
+				<hr width="90%" size="2" color="white">
+				<center><div><input type="submit" value="提交" id="btn_add" >
+<!--					<input type="submit" value="提交" formaction="/stuinfo/update" style="display:none" id="btn_update">-->
+				</div></center>
+			</form>
+		</div>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("addinfo");
+				var box1=document.getElementById("h4");
+				var box2=document.getElementById("aa2")
+				box1.onmousedown = function(){
+					document.onmousemove = function(event){
+						event = event || window.event;
+						var left = event.clientX;
+						var top = event.clientY;
+						box.focus();
+						box.style.left = left +"px";
+						box.style.top = top +"px";
+						document.onmouseup = function(){
+							document.onmousemove = null;
+							document.onmouseup = null;
+						};
+					};
+				};
+			};
+			//----清除添加信息框的内容-----
+			function cleanAddInput(){
+				document.getElementById('stuid').value='';
+			}
+			//----清除添加信息框的内容-----
+
+			//----显示添加信息框-----
+			function showAddInput(){
+				document.getElementById('addinfo').style="display:block-inline" ;
+				document.getElementById('btn_add').style="display:block-inline" ;
+				document.getElementById('btn_update').style="display:none" ;
+				cleanAddInput();
+			}
+			//----显示添加信息框-----
+
+			//----隐藏添加信息框-----
+			function hideAddInput(){
+				document.getElementById('addinfo').style="display:none" ;
+
+			}
+			//----隐藏添加信息框-----
+		</script>
+	</body>
+</html>

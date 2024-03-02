@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>班级信息</title>
+		<link rel="stylesheet" type="text/css" href="/kiruya/css/classinfo.css">
+	</head>
+	<body>
+		<div id="a1">
+		</div>
+		<div id="a3"></div>
+		<div id="a2">
+			<form action="/classinfo/select" method="post" style="text-align: left">
+				<select name="failchoice">
+					<option value="All">全部</option>
+					<option th:each="fail, fstat:${session.falist}" th:value="${fail.name}" th:text="${fail.name}"></option>
+				</select>
+				<button type="submit">筛选</button>
+			</form>
+		</div>
+		<div class="table" >
+		 <table border="1" style="text-align:center" id="table" cellspacing="0">
+		 	 <tr><th>编号</th><th>院系</th><th>班级</th><th>辅导员</th><th>人数</th><th>操作</th></tr>
+			 <tr>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td>
+					 <a onclick="javascript:showAddInput();" id="xiu">添加班级</a>
+				 </td>
+			 </tr>
+			 <tr th:each="classinfo, stat:${session.cinfolist}">
+				 <td th:text="${classinfo.id}" th:id="'rowsid' + ${classinfo.id}"></td>
+				 <td th:text="${classinfo.faculties}" th:id="'rowsfa' + ${classinfo.id}"></td>
+				 <td th:text="${classinfo.classn}" th:id="'rowscl' + ${classinfo.id}"></td>
+				 <td th:text="${classinfo.headteacher}" th:id="'rowstea' + ${classinfo.id}"></td>
+				 <td th:text="${classinfo.personnum}" th:id="'rowsnum' + ${classinfo.id}"></td>
+				 <td>
+					 <a style="color:#6495ED;cursor: pointer;" th:onclick="|updateRow(${classinfo.id})|" id="xiu">修改<a>
+						 &nbsp<a style="color:chocolate;cursor:pointer;" th:href="@{'/classinfo/delete/' + ${classinfo.id}}" id="xiu">删除</a>
+				 </td>
+			 </tr>
+		 </table>
+		</div>
+		<div id="addinfo" style="display: none;" title="点击鼠标以固定，滑动鼠标拖动">
+			<form action="/classinfo/addinfo" method="post" id="form1" >
+				<center>
+					<div id="h4">
+						<b>请添加信息</b>
+					</div>
+				</center>
+				<div id="h3">
+					<span style=" color: white;cursor:pointer;" onclick="hideAddInput()" id="span1">×</span>
+				</div> <br><center>
+			 <input type="hidden" id="bid" name="id"/><br>
+			 <input type="text" id="xueyuan" name="faculties" placeholder="请输入学院"/><br><!--限制用户名只能用英文 下划线 或数字-->
+			 <input type="text" id="banji" name="classn" placeholder="请输入班级"/><br>
+			 <input type="text" id="name" name="headteacher" placeholder="请输入辅导员"/><br>
+			 <input type="text" id="num" name="personnum" placeholder="请输入人数"/><br>
+			 <br><var></var></center>
+			 <center><input type="submit" value="提交" id="btn_add" >
+			 <input type="submit" value="提交" formaction="/classinfo/update" style="display:none" id="btn_update">
+			 <input type="button" value="取消" onclick="hideAddInput()" id="btn_ext"></center>
+			</form>
+		</div>
+		<script type="text/javascript" src="/kiruya/js/classinfo.js">
+		</script>
+	</body>
+</html>

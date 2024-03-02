@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/kiruya/css/firstpage.css">
+	</head>
+	<body>
+	<div id="a3">
+		<font size="4" class="font1">学院总人数</font>
+		<hr color="#666" size="2" width="30%" align="left">
+		<center>
+			<div id="btoom">
+				<b th:text="${session.Allstunum}+'人'"></b>
+				<div id="biao">
+					<b>Ⅰ</b>
+				</div>
+			</div></center>
+	</div>
+	<div id="a1">
+		<font size="4" class="font3">学院均挂科率</font>
+		<hr color="#666" size="2" width="30%" align="left">
+		<center>
+			<div id="btoom1">
+				<b th:text="${session.failSTU}+'%'"></b>
+				<div id="biao">
+					<b>Ⅱ</b>
+				</div>
+			</div></center>
+	</div>
+	<div id="a2">
+		<div class="month">
+			<center>
+				<ul>
+					<li class="prev"><span style="font-size: 28px;color: #6495ED;" id="prevMonth">❮</span></li>
+					<li class="next"><span style="font-size: 28px;color: #6495ED;" id="nextMonth">❯</span></li>
+					<li style="text-align:center">
+						<span style="font-size: 28px;color: #6495ED" id="nowmonth"></span><br>
+						<span style="font-size:28px;color: #6495ED;" id="nowyear"></span>
+					</li>
+				</ul></center>
+		</div>
+		<div class='calendar' id='calendar'></div>
+	</div>
+	<div id="a1">
+		<font size="4" class="font1">班级总数</font>
+		<hr color="#666" size="2" width="30%" align="left">
+		<center>
+			<div id="btoom">
+				<b th:text="${session.classNUM}+'个'"></b>
+				<div id="biao">
+					<b>Ⅲ</b>
+				</div>
+			</div></center>
+	</div>
+	<div id="a3">
+		<font size="4" class="font1">班级均人数</font>
+		<hr color="#666" size="2" width="30%" align="left">
+		<center>
+			<div id="btoom">
+				<b th:text="${session.classSTU}+'人'"></b>
+				<div id="biao">
+					<b>Ⅳ</b>
+				</div>
+			</div></center>
+	</div>
+<!--	<div id="a3">-->
+<!--		<font size="4" class="font1">空闲教室个数</font>-->
+<!--		<hr color="#666" size="2" width="30%" align="left">-->
+<!--		<center>-->
+<!--			<div id="btoom">-->
+<!--				<b>32个</b><div id="biao">-->
+<!--				<b>Ⅴ</b>-->
+<!--			</div>-->
+<!--			</div></center>-->
+<!--	</div>-->
+<!--	<div id="a1">-->
+<!--		<font size="4" class="font3">违规违纪人数</font>-->
+<!--		<hr color="#666" size="2" width="30%" align="left">-->
+<!--		<center>-->
+<!--			<div id="btoom1">-->
+<!--				<b>18人</b>-->
+<!--				<div id="biao">-->
+<!--					<b>Ⅵ</b>-->
+<!--				</div>-->
+<!--			</div></center>-->
+<!--	</div>-->
+	</body>
+	<script src="/kiruya/js/firstpage.js" type="text/javascript"></script>
+</html>
